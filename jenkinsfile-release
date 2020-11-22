@@ -1,0 +1,21 @@
+node {
+    try{
+        stage('Clean workspace'){
+            deleteDir();
+        }
+
+        stage('Preparation'){
+            checkout scm
+        }
+
+        stage('Tests unitaires'){
+            sh "mvn test"
+        }
+
+        stage('Build and install'){
+            sh "mvn install"
+        }
+    }catch(e){
+        throw e
+    }
+}
